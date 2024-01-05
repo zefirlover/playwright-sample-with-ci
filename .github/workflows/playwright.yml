@@ -26,10 +26,11 @@ jobs:
         path: playwright-report/
         retention-days: 30
 
+  pages:
     - name: Deploy to GitHub Pages
       if: success()
       uses: JamesIves/github-pages-deploy-action@4.1.4
       with:
         branch: gh-pages
         folder: playwright-report
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.PAT_TOKEN }}
