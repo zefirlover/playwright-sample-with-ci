@@ -40,4 +40,4 @@ jobs:
         env:
           PERSONAL_TOKEN: ${{ secrets.PAT_TOKEN }}
           PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: ./playwright-report/*
+          PUBLISH_DIR: playwright-report
