@@ -29,11 +29,12 @@ jobs:
   pages:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    needs: [test]
     steps:
     - name: Deploy to GitHub Pages
       if: success()
       uses: JamesIves/github-pages-deploy-action@4.1.4
       with:
         branch: gh-pages
-        folder: ./playwright-report/*
+        folder: playwright-report
         token: ${{ secrets.PAT_TOKEN }}
