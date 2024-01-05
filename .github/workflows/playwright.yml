@@ -29,15 +29,15 @@ jobs:
       run: ls -l
 
   pages:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
     needs: [test]
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Deploy report to Github Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v2
-        env:
-          PERSONAL_TOKEN: ${{ secrets.PAT_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: playwright-report
+    - name: Deploy to GitHub Pages
+      if: success()
+      uses: peaceiris/actions-gh-pages@v3.7.3
+      with:
+        branch: gh-pages
+        publish_dir: playwright-report/
+        github_token: ${{ secrets.PAT_TOKEN }}
+        keep_files: true
