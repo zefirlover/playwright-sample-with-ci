@@ -48,6 +48,16 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: playwright-report
+    - name: List directory contents
+      run: ls -l
+    - name: Check index.html existence
+      run: |
+        if [ -f "playwright-report" ]; then
+          echo "playwright-report exists."
+        else
+          echo "playwright-report does not exist."
+          exit 1
+        fi
     - name: Deploy to GitHub Pages
       if: success()
       uses: peaceiris/actions-gh-pages@v3.7.3
