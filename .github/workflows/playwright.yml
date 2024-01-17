@@ -42,24 +42,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: [test]
     steps:
-    - name: List directory contents
-      run: ls -l
-    - name: Check index.html existence
-      run: |
-        if [ -f "playwright-report" ]; then
-          echo "playwright-report exists."
-        else
-          echo "playwright-report does not exist."
-          exit 1
-        fi
-    - name: Check index.html existence
-      run: |
-        if [ -f "playwright-report/index.html" ]; then
-          echo "index.html exists."
-        else
-          echo "index.html does not exist."
-          exit 1
-        fi
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Download Playwright report artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: playwright-report
     - name: Deploy to GitHub Pages
       if: success()
       uses: peaceiris/actions-gh-pages@v3.7.3
