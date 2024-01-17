@@ -42,6 +42,16 @@ jobs:
     runs-on: ubuntu-latest
     needs: [test]
     steps:
+    - name: List directory contents
+      run: ls -l
+    - name: Check index.html existence
+      run: |
+        if [ -f "playwright-report" ]; then
+          echo "playwright-report exists."
+        else
+          echo "playwright-report does not exist."
+          exit 1
+        fi
     - name: Check index.html existence
       run: |
         if [ -f "playwright-report/index.html" ]; then
